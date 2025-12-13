@@ -1,16 +1,16 @@
 modules:
   jira:issuePanel:
     - key: pitcrew-insights-issue-panel
-      title: PitCrew Insights
-      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
       resource: main
       resolver:
         function: resolver
       render: native
+      title: PitCrew Insights
+      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
 
   function:
     - key: resolver
-      handler: index.handler
+      handler: src/resolvers/index.handler
 
 resources:
   - key: main

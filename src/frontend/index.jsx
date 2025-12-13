@@ -17,7 +17,7 @@ const App = () => {
   }
 
   if (!data) {
-    return <Text>Loading issue data...</Text>;
+    return <Text>Loading issue data…</Text>;
   }
 
   return (

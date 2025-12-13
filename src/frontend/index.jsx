@@ -1,26 +1,33 @@
-import ForgeReconciler, { Text, Stack } from '@forge/react'
-import { invoke } from '@forge/bridge'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { invoke } from '@forge/bridge';
+import { Text, Stack } from '@forge/react';
 
 const App = () => {
-  const [issue, setIssue] = useState(null)
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    invoke('getIssue').then(setIssue)
-  }, [])
+    invoke('getIssueData')
+      .then(setData)
+      .catch(() => setError('Failed to load issue data'));
+  }, []);
 
-  if (!issue) {
-    return <Text>Loading issue data...</Text>
+  if (error) {
+    return <Text>{error}</Text>;
+  }
+
+  if (!data) {
+    return <Text>Loading issue data...</Text>;
   }
 
   return (
-    <Stack space="space.200">
-      <Text><b>Issue Key:</b> {issue.key}</Text>
-      <Text><b>Summary:</b> {issue.fields.summary}</Text>
-      <Text><b>Status:</b> {issue.fields.status.name}</Text>
-      <Text><b>Reporter:</b> {issue.fields.reporter.displayName}</Text>
+    <Stack space="space.100">
+      <Text>Issue Key: {data.key}</Text>
+      <Text>Summary: {data.summary}</Text>
+      <Text>Status: {data.status}</Text>
+      <Text>Reporter: {data.reporter}</Text>
     </Stack>
-  )
-}
+  );
+};
 
-ForgeReconciler.render(<App />)
+export default App;

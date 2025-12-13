@@ -12,13 +12,8 @@ const App = () => {
       .catch(() => setError('Failed to load issue data'));
   }, []);
 
-  if (error) {
-    return <Text>{error}</Text>;
-  }
-
-  if (!data) {
-    return <Text>Loading issue data…</Text>;
-  }
+  if (error) return <Text>{error}</Text>;
+  if (!data) return <Text>Loading issue data…</Text>;
 
   return (
     <Stack space="space.100">

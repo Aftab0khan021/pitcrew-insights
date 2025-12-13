@@ -1,6 +1,6 @@
 modules:
   jira:issuePanel:
-    - key: pitcrew-insights-issue-panel
+    - key: pitcrew-insights-panel
       resource: main
       resolver:
         function: resolver

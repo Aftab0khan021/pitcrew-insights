@@ -1,0 +1,26 @@
+modules:
+  jira:issuePanel:
+    - key: pitcrew-insights-issue-panel
+      title: PitCrew Insights
+      icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
+      resource: main
+      resolver:
+        function: resolver
+      render: native
+
+  function:
+    - key: resolver
+      handler: index.handler
+
+resources:
+  - key: main
+    path: src/frontend/index.jsx
+
+permissions:
+  scopes:
+    - read:jira-work
+
+app:
+  id: ari:cloud:ecosystem::app/fd6ef2ab-c7c3-4174-889d-b7a937a10380
+  runtime:
+    name: nodejs22.x

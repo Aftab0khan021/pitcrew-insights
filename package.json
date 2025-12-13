@@ -1,0 +1,17 @@
+{
+  "name": "pitcrew-insights",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "forge lint"
+  },
+  "dependencies": {
+    "@forge/api": "^4.0.0",
+    "@forge/resolver": "^1.5.0",
+    "@forge/react": "^10.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-plugin-react-hooks": "^4.6.0"
+  }
+}

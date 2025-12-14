@@ -20,6 +20,13 @@ modules:
       actions:
         - fetchIssueTelemetry
 
+  # <-- THIS CRUCIAL BLOCK WAS MISSING -->
+  rovo:action:
+    - key: fetchIssueTelemetry
+      name: Fetch Issue Telemetry
+      description: Fetches status history and telemetry for a Jira issue to understand time spent in each status.
+      function: agent-handler
+
   function:
     - key: resolver
       handler: src/resolvers/index.handler

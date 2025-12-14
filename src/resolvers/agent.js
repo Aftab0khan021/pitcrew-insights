@@ -3,7 +3,6 @@ import api, { route } from '@forge/api';
 
 const resolver = new Resolver();
 
-// Reusing the calculation logic for the agent (simplified version)
 function calculateTelemetry(issue) {
   const histories = issue.changelog?.histories || [];
   histories.sort((a, b) => new Date(a.created) - new Date(b.created));
@@ -12,13 +11,11 @@ function calculateTelemetry(issue) {
   let currentStatus = 'Initial'; 
   let lastTime = new Date(issue.fields.created).getTime();
 
-  // Attempt to find initial status
   const firstChange = histories.find(h => h.items.some(i => i.field === 'status'));
   if (firstChange) {
     currentStatus = firstChange.items.find(i => i.field === 'status').fromString;
   }
 
-  // Sum up times
   for (const history of histories) {
     const item = history.items.find(i => i.field === 'status');
     if (item) {
@@ -30,7 +27,6 @@ function calculateTelemetry(issue) {
     }
   }
   
-  // Add time until now
   const now = Date.now();
   const hours = (now - lastTime) / (1000 * 60 * 60);
   timeInStatus[currentStatus] = (timeInStatus[currentStatus] || 0) + hours;
@@ -39,13 +35,10 @@ function calculateTelemetry(issue) {
 }
 
 resolver.define('fetchIssueTelemetry', async ({ context }) => {
-  // Rovo agents pass context differently, usually providing the issue in the context if invoked from an issue
   const issueKey = context.extension.issue?.key || context.extension.context?.issueKey;
 
   if (!issueKey) {
-    return { 
-      error: "No issue key found. Please ensure you are running this agent from a Jira Issue context." 
-    };
+    return { error: "No issue key found. Run this agent from a Jira Issue context." };
   }
 
   const response = await api.asUser().requestJira(

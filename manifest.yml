@@ -8,9 +8,23 @@ modules:
       title: PitCrew Insights
       icon: https://developer.atlassian.com/platform/forge/images/icons/issue-panel-icon.svg
 
+  rovo:agent:
+    - key: pitcrew-race-engineer
+      name: Race Engineer
+      description: Analyzes Jira issues to identify bottlenecks and suggest pit strategies.
+      prompt: >
+        You are an expert Race Engineer for software teams. 
+        Your job is to analyze Jira issues and identify why they are stuck.
+        Always use racing metaphors (pit stops, yellow flags, fuel load, track position).
+        When asked about an issue, use the 'fetchIssueTelemetry' action to get the data first.
+      actions:
+        - fetchIssueTelemetry
+
   function:
     - key: resolver
       handler: src/resolvers/index.handler
+    - key: agent-handler
+      handler: src/resolvers/agent.handler
 
 resources:
   - key: main
